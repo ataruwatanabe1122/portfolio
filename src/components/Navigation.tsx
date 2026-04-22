@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
+  { label: "About",    href: "#about" },
+  { label: "Skills",   href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact",  href: "#contact" },
 ];
 
 export default function Navigation() {
@@ -21,52 +21,65 @@ export default function Navigation() {
 
   const handleClick = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled
+          ? "bg-canvas/95 backdrop-blur-md border-b border-brown-100"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="text-sm font-semibold tracking-widest text-gray-800">ATARU.DEV</span>
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-sm bg-forest-900" />
+          <span className="text-sm font-bold tracking-widest text-brown-950">
+            ATARU.DEV
+          </span>
+        </div>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => handleClick(item.href)}
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-wide"
+              className="text-sm tracking-wide font-medium text-brown-700 transition-colors group relative"
             >
-              {item.label}
+              <span className="group-hover:text-forest-900 transition-colors">{item.label}</span>
+              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-forest-900 group-hover:w-full transition-all duration-300" />
             </button>
           ))}
         </nav>
 
-        {/* Hamburger */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-1"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="メニュー"
         >
-          <span className={`block w-5 h-0.5 bg-gray-800 transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-gray-800 transition-all ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-gray-800 transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className={`block w-5 h-0.5 bg-brown-950 transition-all duration-300 ${
+                i === 1 && menuOpen ? "opacity-0" : ""
+              } ${
+                i === 0 && menuOpen ? "rotate-45 translate-y-2" : ""
+              } ${
+                i === 2 && menuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
+          ))}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100">
+        <div className="bg-canvas/98 backdrop-blur-md border-t border-brown-100">
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => handleClick(item.href)}
-              className="block w-full text-left px-6 py-4 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+              className="block w-full text-left px-6 py-4 text-sm font-medium text-brown-950 transition-colors hover:text-forest-900"
             >
               {item.label}
             </button>

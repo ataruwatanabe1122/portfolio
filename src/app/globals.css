@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f4;
+  --foreground: #3d2b1f;
 }
 
 @theme inline {
@@ -10,6 +10,69 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@theme {
+  /* ── Canvas ── */
+  --color-canvas: #faf8f4;
+
+  /* ── Brown palette (base) ── */
+  --color-brown-950: #3d2b1f;
+  --color-brown-800: #5c4a38;
+  --color-brown-700: #7c6a52;
+  --color-brown-600: #8b7355;
+  --color-brown-400: #a89880;
+  --color-brown-300: #c4b8a8;
+  --color-brown-200: #d4c5a9;
+  --color-brown-150: #ddd0bc;
+  --color-brown-100: #e0d8cc;
+  --color-brown-75:  #f0ebe0;
+  --color-brown-warm: #faf6f0;
+  --color-brown-50:  #f5f0e8;
+
+  /* ── Forest green (emphasis only) ── */
+  --color-forest-900: #3d6b4f;
+  --color-forest-700: #5a8a6a;
+  --color-forest-400: #a8c8b4;
+  --color-forest-200: #b8d4c0;
+  --color-forest-150: #c0d8c8;
+  --color-forest-100: #e8f2ec;
+  --color-forest-50:  #dff0e8;
+
+  /* ── Special surfaces ── */
+  --color-dark-warm: #2a1f16;
+
+  /* ── Shadows ── */
+  --shadow-hero:  0 16px 48px rgba(61,43,31,0.10), 0 4px 14px rgba(61,43,31,0.06);
+  --shadow-card:  0 8px 32px rgba(61,43,31,0.08);
+  --shadow-badge: 0 2px 8px rgba(61,107,79,0.28);
+}
+
+/* Gradient background for the dog illustration circle */
+@utility dog-circle-bg {
+  background: linear-gradient(
+    150deg,
+    var(--color-forest-100) 0%,
+    var(--color-forest-50) 55%,
+    #f0ede6 100%
+  );
+}
+
+/* Concentric decorative circles in Hero */
+@utility circle-sm {
+  width: 520px;
+  height: 520px;
+  opacity: 0.55;
+}
+@utility circle-md {
+  width: 800px;
+  height: 800px;
+  opacity: 0.30;
+}
+@utility circle-lg {
+  width: 1080px;
+  height: 1080px;
+  opacity: 0.14;
 }
 
 body {
