@@ -41,22 +41,20 @@ export default function Hero() {
             </span>
             <span className="w-5 h-px bg-brown-300" />
           </div>
-          <h1 className="text-lg sm:text-xl md:text-2xl font-light leading-[1.35] text-brown-950">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-light leading-[1.35] text-brown-950">
             <strong className="font-bold text-forest-900">プロジェクト全体</strong>
             を意識し
             <br />
             チームを推進する
             <br />
             <span className="inline-flex items-center gap-2">
-              <span className="text-3xl font-thin text-brown-300 leading-none select-none">＼</span>
               フロントエンドエンジニア
-              <span className="text-3xl font-thin text-brown-300 leading-none select-none">／</span>
             </span>
           </h1>
         </div>
 
         {/* ② Dog — rings + float animation */}
-        <div className="relative flex items-center justify-center w-full py-4">
+        <div className="relative flex items-center justify-center w-full py-4 pointer-events-none">
           {/* Pulsing rings */}
           <div className="absolute w-[290px] h-[290px] md:w-[370px] md:h-[370px] rounded-full border border-brown-200 animate-ring-pulse" />
           <div className="absolute w-[370px] h-[370px] md:w-[470px] md:h-[470px] rounded-full border border-brown-100 animate-ring-pulse [animation-delay:0.9s]" />

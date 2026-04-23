@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { projects, type Phase } from "@/data/profile";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const allPhases: Phase[] = ["要件定義", "基本設計", "詳細設計", "実装", "単体テスト", "結合テスト", "保守・運用"];
 
@@ -26,10 +27,13 @@ function PhaseBar({ phases }: { phases: Phase[] }) {
 
 export default function Projects() {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const headingRef = useScrollReveal();
+  const listRef = useScrollReveal(150);
 
   return (
-    <section id="projects" className="py-24 px-6 max-w-5xl mx-auto">
-      <div className="mb-16">
+    <section id="projects" className="bg-[#f1f6f2]">
+      <div className="py-24 px-6 max-w-5xl mx-auto">
+      <div ref={headingRef} className="mb-16 opacity-0 translate-y-10 transition-all duration-700 ease-out">
         <div className="flex items-center gap-3 mb-5">
           <span className="text-xs font-semibold tracking-widest text-brown-300">03</span>
           <span className="w-6 h-px bg-brown-100" />
@@ -37,17 +41,19 @@ export default function Projects() {
         <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">Projects</h2>
       </div>
 
-      <div className="space-y-4">
+      <div ref={listRef} className="space-y-4 opacity-0 translate-y-10 transition-all duration-700 ease-out">
         {projects.map((project, i) => (
           <article
             key={project.id}
-            className={`rounded-xl overflow-hidden transition-all duration-300 border ${
-              expanded === i ? "border-brown-300 shadow-card" : "border-brown-100"
+            className={`rounded-xl overflow-hidden transition-all duration-300 border group ${
+              expanded === i
+                ? "border-brown-300 shadow-card"
+                : "border-brown-100 hover:border-brown-300 hover:-translate-y-0.5 hover:shadow-card"
             }`}
           >
             <button
               className={`w-full text-left p-6 md:p-7 transition-colors ${
-                expanded === i ? "bg-brown-warm" : "bg-transparent"
+                expanded === i ? "bg-brown-warm" : "bg-transparent hover:bg-brown-warm/50"
               }`}
               onClick={() => setExpanded(expanded === i ? null : i)}
             >
@@ -139,6 +145,7 @@ export default function Projects() {
             )}
           </article>
         ))}
+      </div>
       </div>
     </section>
   );

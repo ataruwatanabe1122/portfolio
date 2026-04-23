@@ -1,26 +1,52 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Contact() {
+  const ref = useScrollReveal();
+  const bubbleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = bubbleRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add("animate-bubble-in"), 350);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="contact" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="contact" className="py-24 px-6 bg-brown-950">
+      <div
+        ref={ref}
+        className="max-w-5xl mx-auto opacity-0 translate-y-10 transition-all duration-700 ease-out"
+      >
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-5">
             <span className="text-xs font-semibold tracking-widest text-brown-300">04</span>
-            <span className="w-6 h-px bg-brown-100" />
+            <span className="w-6 h-px bg-brown-700" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">Contact</h2>
+          <h2 className="text-4xl md:text-5xl font-display italic text-white">Contact</h2>
         </div>
 
-        <div className="rounded-2xl overflow-hidden bg-dark-warm flex items-end gap-0">
+        <div className="rounded-2xl flex items-end gap-0">
 
           {/* テキスト・CTA — speech bubble pointing right toward dog */}
           <div className="flex-1 py-12 px-8 md:px-10 self-center min-w-0">
             <div className="relative">
               {/* Bubble body */}
-              <div className="relative z-[2] rounded-2xl bg-brown-50 border border-brown-200 px-6 py-5">
+              <div ref={bubbleRef} className="relative z-[2] rounded-2xl bg-brown-50 border border-brown-200 px-6 py-5 opacity-0">
                 <p className="text-sm font-light leading-relaxed mb-6 text-brown-700">
-                  お仕事のご依頼やご相談は、メールにてお問い合わせください！
+                  お仕事のご依頼やご相談は、お気軽にメールにてお問い合わせください！
                   <span className="text-xs font-mono text-brown-400 block">
                     ataru.watanabe1122@gmail.com
                   </span>
