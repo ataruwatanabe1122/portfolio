@@ -1,79 +1,83 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { profile } from "@/data/profile";
-import DogIllustration from "./DogIllustration";
 
 export default function Hero() {
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = wrapRef.current;
+    const el = contentRef.current;
     if (!el) return;
     setTimeout(() => {
-      el.classList.remove("opacity-0", "translate-y-7");
-    }, 100);
+      el.classList.remove("opacity-0", "translate-y-6");
+    }, 150);
   }, []);
 
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden bg-canvas">
 
-      {/* Background concentric circles */}
+      {/* Global background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden>
-        <div className="absolute circle-sm rounded-full border border-brown-100" />
-        <div className="absolute circle-md rounded-full border border-brown-100" />
-        <div className="absolute circle-lg rounded-full border border-brown-100" />
+        <div className="w-[600px] h-[600px] rounded-full bg-forest-100 opacity-15 blur-3xl" />
       </div>
 
-      {/* Accent dots */}
-      <div className="absolute top-1/4 right-16 md:right-28 w-3 h-3 rounded-full pointer-events-none bg-brown-200 opacity-60" aria-hidden />
-      <div className="absolute bottom-1/3 left-10 md:left-20 w-2 h-2 rounded-full pointer-events-none bg-brown-300 opacity-55" aria-hidden />
-      <div className="absolute top-1/3 left-1/4 w-1.5 h-1.5 rounded-full pointer-events-none bg-brown-300 opacity-40" aria-hidden />
-
+      {/* ── Main content column ── */}
       <div
-        ref={wrapRef}
-        className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto pt-24 pb-20 opacity-0 translate-y-7 transition-all duration-1000 ease-out"
+        ref={contentRef}
+        className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 opacity-0 translate-y-6 transition-all duration-1000 ease-out"
       >
 
-        {/* Dog illustration — main visual */}
-        <div className="relative mb-10">
-          <div className="w-52 h-52 md:w-64 md:h-64 rounded-full flex items-end justify-center dog-circle-bg border-2 border-brown-300 shadow-hero">
-            <DogIllustration className="w-44 h-44 md:w-56 md:h-56" />
+        {/* ① Headline */}
+        <div className="z-[5] w-full max-w-xs sm:max-w-sm mb-3 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="w-5 h-px bg-brown-300" />
+            <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-brown-600">
+              Watanabe Ataru
+            </span>
+            <span className="w-5 h-px bg-brown-300" />
           </div>
-          {/* Green badge — emphasis */}
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.22em] uppercase whitespace-nowrap bg-forest-900 text-white shadow-badge">
-            Frontend Engineer
+          <h1 className="text-lg sm:text-xl md:text-2xl font-light leading-[1.35] text-brown-950">
+            <strong className="font-bold text-forest-900">プロジェクト全体</strong>
+            を意識し
+            <br />
+            チームを推進する
+            <br />
+            <span className="inline-flex items-center gap-2">
+              <span className="text-3xl font-thin text-brown-300 leading-none select-none">＼</span>
+              フロントエンドエンジニア
+              <span className="text-3xl font-thin text-brown-300 leading-none select-none">／</span>
+            </span>
+          </h1>
+        </div>
+
+        {/* ② Dog — rings + float animation */}
+        <div className="relative flex items-center justify-center w-full py-4">
+          {/* Pulsing rings */}
+          <div className="absolute w-[290px] h-[290px] md:w-[370px] md:h-[370px] rounded-full border border-brown-200 animate-ring-pulse" />
+          <div className="absolute w-[370px] h-[370px] md:w-[470px] md:h-[470px] rounded-full border border-brown-100 animate-ring-pulse [animation-delay:0.9s]" />
+          <div className="absolute w-[450px] h-[450px] md:w-[570px] md:h-[570px] rounded-full border border-brown-100 animate-ring-pulse [animation-delay:1.8s]" />
+          {/* Glow */}
+          <div className="absolute w-56 h-56 rounded-full bg-forest-100 opacity-40 blur-2xl" />
+          {/* Dog image */}
+          <div className="relative z-[2] w-[52vw] max-w-[260px] md:max-w-[340px] animate-float">
+            <Image
+              src="/hero-siba.png"
+              alt=""
+              width={260}
+              height={260}
+              className="w-full h-auto mix-blend-multiply"
+              priority
+            />
           </div>
         </div>
 
-        {/* Name with decorative lines */}
-        <div className="flex items-center gap-4 mt-4 mb-8">
-          <span className="w-10 h-px bg-brown-300" />
-          <p className="text-xs font-semibold tracking-[0.28em] uppercase text-brown-700">
-            Watanabe Ataru
-          </p>
-          <span className="w-10 h-px bg-brown-300" />
-        </div>
-
-        {/* Main headline */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.18] mb-9 text-brown-950">
-          フロントエンドを軸に
-          <br />
-          {/* Green — emphasis only */}
-          <strong className="font-bold text-forest-900">
-            設計・プロセス・チーム
-          </strong>
-          <br />
-          すべてに関わる
-          <br />
-          エンジニア
-        </h1>
-
-        {/* Certifications — brown toned */}
-        <div className="flex flex-wrap gap-2 justify-center mb-10">
+        {/* ③ Certifications — below dog */}
+        <div className="flex flex-wrap gap-2 justify-center mt-4 mb-6">
           {profile.certifications.map((cert) => (
             <span
               key={cert}
@@ -84,16 +88,14 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* CTA buttons */}
+        {/* ④ CTAs — below certs */}
         <div className="flex flex-wrap gap-3 justify-center">
-          {/* Primary — green emphasis */}
           <button
             onClick={() => scrollTo("#projects")}
             className="text-sm font-semibold text-white px-8 py-3.5 rounded-full bg-forest-900 transition-all hover:opacity-90 hover:shadow-lg hover:-translate-y-0.5"
           >
             実績を見る
           </button>
-          {/* Secondary — brown */}
           <button
             onClick={() => scrollTo("#contact")}
             className="text-sm font-semibold px-8 py-3.5 rounded-full border-2 border-brown-300 text-brown-800 bg-transparent transition-all hover:-translate-y-0.5"
@@ -103,8 +105,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-[38%]">
+      {/* ── Scroll indicator ── */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-[38%] z-10">
         <span className="text-[10px] tracking-[0.25em] uppercase text-brown-700">Scroll</span>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
           <path d="M4 6.5l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brown-700" />

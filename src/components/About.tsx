@@ -1,14 +1,21 @@
+import Image from "next/image";
 import { profile } from "@/data/profile";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 max-w-5xl mx-auto">
+    <section id="about" className="relative py-24 px-6 max-w-5xl mx-auto overflow-hidden">
+
+      {/* Paw print decoration */}
+      <div className="absolute bottom-0 right-0 w-28 md:w-36 opacity-[7%] pointer-events-none select-none" aria-hidden>
+        <Image src="/nikukyu.png" alt="" width={144} height={332} className="w-full h-auto" />
+      </div>
+
       <div className="mb-16">
         <div className="flex items-center gap-3 mb-5">
           <span className="text-xs font-semibold tracking-widest text-brown-300">01</span>
           <span className="w-6 h-px bg-brown-100" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-light text-brown-950">About</h2>
+        <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">About</h2>
       </div>
 
       <div className="grid md:grid-cols-2 gap-12">

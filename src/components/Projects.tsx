@@ -34,7 +34,7 @@ export default function Projects() {
           <span className="text-xs font-semibold tracking-widest text-brown-300">03</span>
           <span className="w-6 h-px bg-brown-100" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-light text-brown-950">Projects</h2>
+        <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">Projects</h2>
       </div>
 
       <div className="space-y-4">

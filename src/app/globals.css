@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-playfair);
 }
 
 @theme {
@@ -46,33 +47,22 @@
   --shadow-hero:  0 16px 48px rgba(61,43,31,0.10), 0 4px 14px rgba(61,43,31,0.06);
   --shadow-card:  0 8px 32px rgba(61,43,31,0.08);
   --shadow-badge: 0 2px 8px rgba(61,107,79,0.28);
+
+  /* ── Animations ── */
+  --animate-float:      float 4.5s ease-in-out infinite;
+  --animate-ring-pulse: ring-pulse 2.8s ease-out infinite;
 }
 
-/* Gradient background for the dog illustration circle */
-@utility dog-circle-bg {
-  background: linear-gradient(
-    150deg,
-    var(--color-forest-100) 0%,
-    var(--color-forest-50) 55%,
-    #f0ede6 100%
-  );
+/* Shiba floating up and down with gentle tilt */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+  50%       { transform: translateY(-22px) rotate(1.5deg); }
 }
 
-/* Concentric decorative circles in Hero */
-@utility circle-sm {
-  width: 520px;
-  height: 520px;
-  opacity: 0.55;
-}
-@utility circle-md {
-  width: 800px;
-  height: 800px;
-  opacity: 0.30;
-}
-@utility circle-lg {
-  width: 1080px;
-  height: 1080px;
-  opacity: 0.14;
+/* Ring expands outward and fades */
+@keyframes ring-pulse {
+  0%   { transform: scale(1);    opacity: 0.45; }
+  100% { transform: scale(1.35); opacity: 0; }
 }
 
 body {
@@ -83,4 +73,12 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+@utility hero-bubble {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 72%, 50% 100%, 0% 72%);
+}
+
+@utility hero-bubble-shadow {
+  filter: drop-shadow(0 3px 10px rgba(61, 43, 31, 0.18));
 }

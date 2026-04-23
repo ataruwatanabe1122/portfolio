@@ -1,14 +1,21 @@
+import Image from "next/image";
 import { skillCategories } from "@/data/profile";
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 max-w-5xl mx-auto">
+    <section id="skills" className="relative py-24 px-6 max-w-5xl mx-auto overflow-hidden">
+
+      {/* Paw print decoration */}
+      <div className="absolute top-8 right-0 w-20 md:w-24 opacity-[6%] pointer-events-none select-none" aria-hidden>
+        <Image src="/nikukyu.png" alt="" width={96} height={221} className="w-full h-auto" />
+      </div>
+
       <div className="mb-16">
         <div className="flex items-center gap-3 mb-5">
           <span className="text-xs font-semibold tracking-widest text-brown-300">02</span>
           <span className="w-6 h-px bg-brown-100" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-light text-brown-950">Skills</h2>
+        <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">Skills</h2>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
