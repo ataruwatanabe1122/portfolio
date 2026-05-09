@@ -52,7 +52,7 @@ export default function PawTrail() {
   if (paws.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-40" aria-hidden>
+    <div className="fixed inset-0 pointer-events-none z-0" aria-hidden>
       {paws.map(({ id, pos }) => (
         <div key={id} className={`absolute w-8 md:w-10 ${pos.topClass} ${pos.leftClass}`}>
           <div className={pos.rotateClass}>

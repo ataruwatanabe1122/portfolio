@@ -27,34 +27,33 @@ function PhaseBar({ phases }: { phases: Phase[] }) {
 
 export default function Projects() {
   const [expanded, setExpanded] = useState<number | null>(null);
-  const headingRef = useScrollReveal();
-  const listRef = useScrollReveal(150);
+  const { ref: headingRef, revealClass: headingReveal } = useScrollReveal();
+  const { ref: listRef, revealClass: listReveal } = useScrollReveal(150);
 
   return (
-    <section id="projects" className="bg-[#f1f6f2]">
+    <section id="projects" className="bg-brown-warm">
       <div className="py-24 px-6 max-w-5xl mx-auto">
-      <div ref={headingRef} className="mb-16 opacity-0 translate-y-10 transition-all duration-700 ease-out">
-        <div className="flex items-center gap-3 mb-5">
+      <div ref={headingRef} className={`mb-16 text-center ${headingReveal}`}>
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <span className="w-8 h-px bg-brown-200" />
           <span className="text-xs font-semibold tracking-widest text-brown-300">03</span>
-          <span className="w-6 h-px bg-brown-100" />
+          <span className="w-8 h-px bg-brown-200" />
         </div>
         <h2 className="text-4xl md:text-5xl font-display italic text-brown-950">Projects</h2>
       </div>
 
-      <div ref={listRef} className="space-y-4 opacity-0 translate-y-10 transition-all duration-700 ease-out">
+      <div ref={listRef} className={`space-y-4 ${listReveal}`}>
         {projects.map((project, i) => (
           <article
             key={project.id}
-            className={`rounded-xl overflow-hidden transition-all duration-300 border group ${
+            className={`relative z-[1] rounded-xl overflow-hidden transition-all duration-300 border group bg-white ${
               expanded === i
                 ? "border-brown-300 shadow-card"
                 : "border-brown-100 hover:border-brown-300 hover:-translate-y-0.5 hover:shadow-card"
             }`}
           >
             <button
-              className={`w-full text-left p-6 md:p-7 transition-colors ${
-                expanded === i ? "bg-brown-warm" : "bg-transparent hover:bg-brown-warm/50"
-              }`}
+              className="w-full text-left p-6 md:p-7"
               onClick={() => setExpanded(expanded === i ? null : i)}
             >
               <div className="flex items-start justify-between gap-4">

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Contact() {
-  const ref = useScrollReveal();
+  const { ref, revealClass } = useScrollReveal();
   const bubbleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,15 +25,16 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="py-24 px-6 bg-brown-950">
+    <section id="contact" className="py-24 px-6 bg-brown-950 relative z-10 rounded-t-3xl [box-shadow:0_-16px_24px_rgba(61,43,31,0.11)]">
       <div
         ref={ref}
-        className="max-w-5xl mx-auto opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        className={`max-w-5xl mx-auto ${revealClass}`}
       >
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-5">
+        <div className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <span className="w-8 h-px bg-brown-700" />
             <span className="text-xs font-semibold tracking-widest text-brown-300">04</span>
-            <span className="w-6 h-px bg-brown-700" />
+            <span className="w-8 h-px bg-brown-700" />
           </div>
           <h2 className="text-4xl md:text-5xl font-display italic text-white">Contact</h2>
         </div>
