@@ -1,16 +1,16 @@
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import PawTrail from "@/components/PawTrail";
+import Hero from "@/components/home/Hero";
+import About from "@/components/home/About";
+import Skills from "@/components/home/Skills";
+import Projects from "@/components/home/Projects";
+import Contact from "@/components/home/Contact";
+import Footer from "@/components/common/Footer";
+import PawTrail from "@/components/home/PawTrail";
+import Header from "@/components/common/Header";
 
 export default function Home() {
   return (
     <>
-      <Navigation />
+      <Header />
       <main>
         <Hero />
         <About />

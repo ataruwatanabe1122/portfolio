@@ -1,17 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
+import { useRouter } from "next/navigation"
 
 const navItems = [
   { label: "About",    href: "#about" },
   { label: "Skills",   href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact",  href: "#contact" },
+  { label: "Practice",  href: "/practice" },
 ];
 
-export default function Navigation() {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -21,7 +24,11 @@ export default function Navigation() {
 
   const handleClick = (href: string) => {
     setMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    if(href.startsWith('#')) {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(href);
+    }
   };
 
   return (
